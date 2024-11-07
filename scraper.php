@@ -18,7 +18,7 @@ function scrapeProductData($productId) {
     }
 
     $dom = new DOMDocument();
-    $dom->loadHTML($html);
+    @$dom->loadHTML($html);
 
     $data = [];
 
