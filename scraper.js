@@ -9,28 +9,36 @@ app.use(cors());
 app.use(bodyParser.json());
 
 async function scrapeProductData(url) {
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'] // ตั้งค่า Puppeteer สำหรับการใช้งานบนเซิร์ฟเวอร์
-    });
-    const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'networkidle2' });
+    let browser;
+    try {
+        browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
+        const page = await browser.newPage();
+        await page.goto(url, { waitUntil: 'networkidle2' });
 
-    const productData = await page.evaluate(() => {
-        const productName = document.querySelector('.product-name')?.textContent.trim();
-        const productCode = document.querySelector('.product-name-by')?.textContent.trim();
-        const productFeatures = Array.from(
-            document.querySelectorAll('#product-detail-feature ul li')
-        ).map(li => li.textContent.trim());
-        
-        const imageUrl = document.querySelector('#carousel-selector-1 img')?.getAttribute('src') || null;
+        const productData = await page.evaluate(() => {
+            const productName = document.querySelector('.product-name')?.textContent.trim();
+            const productCode = document.querySelector('.product-name-by')?.textContent.trim();
+            const productFeatures = Array.from(
+                document.querySelectorAll('#product-detail-feature ul li')
+            ).map(li => li.textContent.trim());
 
-        return { productName, productCode, productFeatures, imageUrl };
-    });
+            const imageUrl = document.querySelector('#carousel-selector-1 img')?.getAttribute('src') || null;
 
-    await browser.close();
-    return productData;
+            return { productName, productCode, productFeatures, imageUrl };
+        });
+
+        return productData;
+    } catch (error) {
+        console.error('Error in scrapeProductData:', error);
+        throw error;
+    } finally {
+        if (browser) await browser.close();
+    }
 }
+
 
 app.post('/scrape', async (req, res) => {
     const productId = req.body.productId || 'A0156029';
