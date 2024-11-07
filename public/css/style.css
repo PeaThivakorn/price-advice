@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3f6fb;
+}
+
+.container {
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.header img {
+    max-width: 100%;
+    height: auto;
+}
+
+.left-top {
+    position: absolute;
+    top: 440px;
+    left: 70px;
+    width: 200px;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-top img {
+    max-width: 80px;
+    height: auto;
+}
+
+.center-main {
+    position: absolute;
+    top: 220px;
+    left: 130px;
+    width: 250px;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-main img {
+    position: absolute;
+    top: 220px;
+    left: 130px;
+    max-width: 100%;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-top {
+    position: absolute;
+    top: 190px;
+    right: 30px;
+    width: 150px;
+    height: auto;
+}
+
+.right-top img {
+    position: absolute;
+    top: 190px;
+    right: 30px;
+    max-width: 100%;
+    height: auto;
+}
+
+.right-middle {
+    position: absolute;
+    top: 220px;
+    right: 30px;
+    width: 140px;
+    height: auto;
+}
+
+.right-middle img {
+    position: absolute;
+    top: 220px;
+    right: 30px;
+    max-width: 100%;
+    height: auto;
+}
+
+.logo {
+    position: absolute;
+    bottom: 390px;
+    left: 70px;
+    width: 700px;
+    height: 50px;
+    text-align: start;
+    line-height: 50px;
+    font-weight: bold; /* ทำให้ข้อความเป็นตัวหนา */
+}
+
+
+.text-long {
+    position: absolute;
+    bottom: 250px;
+    left: 70px;
+    width: 500px;
+    height: 150px;
+    text-align: start;
+    font-weight: 500 !important;
+    font-size: small;
+    line-height: 30px;
+    max-height: 180px; /* ปรับความสูงตามจำนวนแถวที่ต้องการ */
+    overflow-y: auto; /* ทำให้สามารถเลื่อนดูได้เมื่อเกินจำนวนแถว */
+}
+
+.price-left {
+    position: absolute;
+    bottom: 230px;
+    right: 50px;
+    width: 160px;
+    height: 50px;
+    color: #ff0000;
+    text-align: start;
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 42px;
+}
+
+.price-left-top {
+    position: absolute;
+    bottom: 270px;
+    left: 680px;
+    width: 150px;
+    height: 50px;
+    color: #000000;
+    text-align: start;
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    display: none; /* ซ่อนไว้เมื่อไม่มีราคาเต็ม */
+}
+
+.price-left-top:after {
+    content: '';
+    position: absolute;
+    top: 45%;
+    left: -10px;
+    right: 100px;
+    height: 2px;
+    background-color: red;
+    transform: rotate(-13deg); /* หมุนเส้นให้เป็นมุมเฉียง */
+    transform-origin: center;
+}
+
+
+
+#scraper-form,
+#title {
+    transition: opacity 0.5s ease;
+}
+
+
+@page {
+    size: A4;
+    margin: 0;
+    padding: 0;
+}
+
+/* @media print {
+    .text-long {
+        max-height: none; ปิดการจำกัดความสูง
+        overflow-y: visible; ปิดตัวเลื่อนในโหมดพิมพ์
+    }
+
+    ซ่อน scrollbar เมื่อพิมพ์
+    body {
+        overflow: visible;
+    }
+
+    ซ่อนตัวเลื่อนในกรณีอื่นๆ
+    ::-webkit-scrollbar {
+        display: none;
+    }
+} */
+
+
+h1#title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+#scraper-form {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: left;
+}
+
+#scraper-form label {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+#scraper-form input,
+#scraper-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#scraper-form input:focus,
+#scraper-form select:focus {
+    border-color: #4c9aff;
+}
+
+#scraper-form input::placeholder,
+#scraper-form select::placeholder {
+    color: #bbb;
+}
+
+#scraper-form button {
+    background-color: #4c9aff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#scraper-form button:hover {
+    background-color: #357bd3;
+}
+
+#scraper-form button:active {
+    background-color: #3366cc;
+}
+
+/* Input field group styling */
+#scraper-form div {
+    margin-bottom: 15px;
+}
+
+
+@media print {
+    .feature-list {
+        max-height: none; /* ยกเลิกการจำกัดความสูงเมื่อพิมพ์ */
+        overflow: visible; /* ทำให้เห็นเนื้อหาทั้งหมด */
+    }
+
+    /* ซ่อน scrollbar เมื่อพิมพ์ */
+    body {
+        overflow: visible;
+    }
+
+    /* ซ่อนตัวเลื่อนในกรณีอื่นๆ */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* ซ่อนเนื้อหาที่เกิน 6 แถวในโหมดการพิมพ์ */
+    .feature-list li:nth-child(n+7) {
+        display: none; /* ซ่อนแถวที่ 7 และหลังจากนั้น */
+    }
+}
