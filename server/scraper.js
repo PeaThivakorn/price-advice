@@ -1,10 +1,12 @@
 const express = require('express');
 const cors = require('cors');
+const setCSP = require('./config/cspConfig');  // นำเข้า setCSP
 const puppeteer = require('puppeteer');
 const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(setCSP);
 app.use(cors());
 app.use(bodyParser.json());
 
