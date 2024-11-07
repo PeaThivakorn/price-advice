@@ -3,13 +3,13 @@ const cors = require('cors');
 const puppeteer = require('puppeteer');
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
 async function scrapeProductData(url) {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'networkidle2' });
 
