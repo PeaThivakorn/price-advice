@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Special Promotion</title>
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="public/css/style.css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
 </head>
@@ -18,26 +18,26 @@
     <label for="cpuSelect">CPU:</label>
     <select id="cpuSelect">
         <option value="">--Select CPU--</option>
-        <option value="/public/img/Core_i3.png">Core i3</option>
-        <option value="/public/img/Core_i5.png">Core i5</option>
-        <option value="/public/img/Core_i7.png">Core i7</option>
-        <option value="/public/img/ryzen3.png">Ryzen 3</option>
-        <option value="/public/img/ryzen5.png">Ryzen 5</option>
-        <option value="/public/img/ryzen7.png">Ryzen 7</option>
+        <option value="public/img/Core_i3.png">Core i3</option>
+        <option value="public/img/Core_i5.png">Core i5</option>
+        <option value="public/img/Core_i7.png">Core i7</option>
+        <option value="public/img/ryzen3.png">Ryzen 3</option>
+        <option value="public/img/ryzen5.png">Ryzen 5</option>
+        <option value="public/img/ryzen7.png">Ryzen 7</option>
     </select>
 
     <label for="windowsSelect">Windows:</label>
     <select id="windowsSelect">
         <option value="">--Select Windows--</option>
-        <option value="/public/img/windows-10.png">Windows 10</option>
-        <option value="/public/img/windows-11.png">Windows 11</option>
+        <option value="public/img/windows-10.png">Windows 10</option>
+        <option value="public/img/windows-11.png">Windows 11</option>
     </select>
 
     <label for="officeSelect">Microsoft Office:</label>
     <select id="officeSelect">
         <option value="">--Select Office--</option>
-        <option value="/public/img/Office.png">Office 2019</option>
-        <option value="/public/img/Office.png">Office 365</option>
+        <option value="public/img/Office.png">Office 2019</option>
+        <option value="public/img/Office.png">Office 365</option>
     </select>
 
     <div id="scraper-form">
@@ -52,7 +52,7 @@
 
 <div class="container" style="display: none;">
     <div class="header">
-        <img src="/public/img/434648116_944479041010917_203762620117639066_n.jpg" alt="">
+        <img src="public/img/434648116_944479041010917_203762620117639066_n.jpg" alt="">
     </div>
 
     <div class="left-top">
