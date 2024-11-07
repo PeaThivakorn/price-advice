@@ -7,11 +7,13 @@
             }
 
             try {
-                const response = await fetch('https://price-advice.onrender.com/scrape', { // เปลี่ยน URL เป็นของ Render.com
+                const response = await fetch('https://price-advice.onrender.com/scrape', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ productId })
+                    body: JSON.stringify({ productId }),
+                    timeout: 10000  // เพิ่ม timeout 10 วินาที
                 });
+                
 
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
