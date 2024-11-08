@@ -1,7 +1,7 @@
-import os
-import asyncio
-import nest_asyncio
 from flask import Flask, request, jsonify, render_template
+import os
+import nest_asyncio
+import asyncio
 from flask_cors import CORS
 from pyppeteer import launch
 
@@ -35,7 +35,8 @@ async def scrape_product_data(url):
 
 @app.route('/')
 def index():
-    return render_template('ndex.html')
+    # Corrected to 'index.html'
+    return render_template('index.html')
 
 @app.route('/scrape', methods=['POST'])
 async def scrape():
