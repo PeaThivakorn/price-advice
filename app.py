@@ -66,6 +66,8 @@ async def scrape():
 
     try:
         product_data = await scrape_product_data(url)
+        if 'error' in product_data:
+            return jsonify(product_data), 500  # ส่งสถานะ 500 ถ้าเกิดข้อผิดพลาด
         return jsonify(product_data)
     except Exception as e:
         print('Error:', e)
