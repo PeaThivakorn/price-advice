@@ -6,7 +6,7 @@ async function fetchProductData() {
     }
 
     try {
-        const response = await fetch('http://localhost:4000/scrape', {
+        const response = await fetch('/scrape', { // ใช้เส้นทาง relative เพื่อให้ทำงานทั้งใน dev และ production
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ productId })
@@ -19,6 +19,7 @@ async function fetchProductData() {
         displayProductData(productData);
     } catch (error) {
         console.error('Error fetching product data:', error);
+        alert('Failed to fetch product data. Please try again later.');
     }
 }
 
@@ -27,15 +28,19 @@ function displayProductData(data) {
     document.getElementById('scraper-form').style.display = 'none';
     document.getElementById('title').style.display = 'none';
 
-    document.getElementById('product-code').textContent = data.productCode || 'N/A';
+    document.getElementById('product-code').textContent = data.productCode ?? 'N/A';
 
     const featuresList = document.getElementById('product-features');
     featuresList.innerHTML = '';
-    data.productFeatures.forEach(feature => {
-        const li = document.createElement('li');
-        li.textContent = feature;
-        featuresList.appendChild(li);
-    });
+    if (data.productFeatures && data.productFeatures.length > 0) {
+        data.productFeatures.forEach(feature => {
+            const li = document.createElement('li');
+            li.textContent = feature;
+            featuresList.appendChild(li);
+        });
+    } else {
+        featuresList.innerHTML = '<li>No features available.</li>';
+    }
 
     const imagesDiv = document.getElementById('product-images');
     imagesDiv.innerHTML = '';
@@ -46,32 +51,26 @@ function displayProductData(data) {
     }
 
     // Display CPU, Windows, and Office images based on selection
-    const cpuSelect = document.getElementById('cpuSelect').value;
-    const windowsSelect = document.getElementById('windowsSelect').value;
-    const officeSelect = document.getElementById('officeSelect').value;
-
-    document.getElementById('cpuImg').src = cpuSelect || '';
-    document.getElementById('windowsImg').src = windowsSelect || '';
-    document.getElementById('officeImg').src = officeSelect || '';
+    document.getElementById('cpuImg').src = document.getElementById('cpuSelect').value || '';
+    document.getElementById('windowsImg').src = document.getElementById('windowsSelect').value || '';
+    document.getElementById('officeImg').src = document.getElementById('officeSelect').value || '';
 
     // Display full price and discount price if available
     const fullPrice = document.getElementById('fullPrice').value;
     const discountPrice = document.getElementById('discountPrice').value;
 
-    // Show crossed out price for full price if it's not empty
     const priceLeftTop = document.getElementById('price-left-top');
+    const priceLeft = document.getElementById('price-left');
+    
+    // Show crossed out price for full price if it's not empty
     if (fullPrice) {
-        priceLeftTop.textContent = fullPrice + " .-";
-        priceLeftTop.style.display = 'block'; // Display full price
+        priceLeftTop.textContent = `${fullPrice} .-`;
+        priceLeftTop.style.textDecoration = discountPrice ? 'line-through' : 'none'; // Cross out if discount available
+        priceLeftTop.style.display = 'block'; 
     } else {
-        priceLeftTop.style.display = 'none'; // Hide full price if empty
+        priceLeftTop.style.display = 'none'; 
     }
 
     // Show the discount price if available
-    const priceLeft = document.getElementById('price-left');
-    if (discountPrice) {
-        priceLeft.textContent = discountPrice + " .-";
-    } else {
-        priceLeft.textContent = ''; // Clear discount price if not available
-    }
+    priceLeft.textContent = discountPrice ? `${discountPrice} .-` : ''; 
 }

@@ -1,14 +1,18 @@
+import os
 import asyncio
-from flask import Flask, request, jsonify
+import nest_asyncio
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from pyppeteer import launch
 
+# Apply nest_asyncio to allow running async in Flask's dev server
+nest_asyncio.apply()
+
 app = Flask(__name__)
 CORS(app)
-PORT = 3000
 
 async def scrape_product_data(url):
-    browser = await launch(headless=True)
+    browser = await launch(headless=True, args=['--no-sandbox'])
     page = await browser.newPage()
     await page.goto(url, {'waitUntil': 'networkidle2'})
 
@@ -29,6 +33,10 @@ async def scrape_product_data(url):
     await browser.close()
     return product_data
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 @app.route('/scrape', methods=['POST'])
 async def scrape():
     data = request.get_json()
@@ -43,4 +51,5 @@ async def scrape():
         return jsonify({'error': 'Failed to scrape data'}), 500
 
 if __name__ == '__main__':
-    app.run(port=PORT)
+    port = int(os.environ.get("PORT", 3000))
+    app.run(host='0.0.0.0', port=port)
