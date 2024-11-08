@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Special Promotion</title>
+    <!-- เชื่อมโยงไฟล์ CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/frontend.js') }}"></script>
+    <!-- เชื่อมโยงไฟล์ JavaScript -->
+    <script src="{{ url_for('static', filename='js/frontend.js') }}" defer></script>
 </head>
 
 <body>
@@ -58,18 +60,18 @@
         </div>
 
         <div class="left-top">
-            <img id="cpuImg" src="" alt="">
+            <img id="cpuImg" src="" alt="CPU Image">
         </div>
 
         <div class="center-main" id="product-images">
         </div>
 
         <div class="right-top">
-            <img id="windowsImg" class="right-top" src="" alt="">
+            <img id="windowsImg" src="" alt="Windows Image">
         </div>
 
         <div class="right-middle">
-            <img id="officeImg" class="right-middle" src="" alt="">
+            <img id="officeImg" src="" alt="Office Image">
         </div>
 
         <div class="logo" id="product-code"></div>
