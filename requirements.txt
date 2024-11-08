@@ -2,3 +2,4 @@ Flask
 Flask-Cors
 pyppeteer
 nest_asyncio
+gunicorn

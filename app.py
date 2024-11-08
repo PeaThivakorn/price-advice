@@ -35,7 +35,7 @@ async def scrape_product_data(url):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('ndex.html')
 
 @app.route('/scrape', methods=['POST'])
 async def scrape():
