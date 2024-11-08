@@ -18,17 +18,17 @@ async def scrape_product_data(url):
             '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'
         ])
     except Exception as e:
-        print(f"Error launching browser: {e}")
-        return {'error': 'Failed to launch browser'}
+        print(f"Error launching browser: {e}")  # Debug message
+        return {'error': f'Failed to launch browser: {e}'}
 
     try:
         # Create a new page and navigate to the URL
         page = await browser.newPage()
         await page.goto(url, {'waitUntil': 'networkidle2'})
     except Exception as e:
-        print(f"Error navigating to page: {e}")
+        print(f"Error navigating to page: {e}")  # Debug message
         await browser.close()
-        return {'error': 'Failed to navigate to page'}
+        return {'error': f'Failed to navigate to page: {e}'}
 
     try:
         # Extract product data from the page
@@ -46,9 +46,9 @@ async def scrape_product_data(url):
             }
         ''')
     except Exception as e:
-        print(f"Error extracting data from page: {e}")
+        print(f"Error extracting data from page: {e}")  # Debug message
         await browser.close()
-        return {'error': 'Failed to extract data'}
+        return {'error': f'Failed to extract data: {e}'}
 
     await browser.close()
     return product_data
@@ -67,10 +67,11 @@ async def scrape():
     try:
         product_data = await scrape_product_data(url)
         if 'error' in product_data:
-            return jsonify(product_data), 500  # ส่งสถานะ 500 ถ้าเกิดข้อผิดพลาด
+            print("Scraping error:", product_data['error'])  # Debug message
+            return jsonify(product_data), 500  # Return 500 status if there was an error
         return jsonify(product_data)
     except Exception as e:
-        print('Error:', e)
+        print('Error in /scrape route:', e)  # Debug message
         return jsonify({'error': f'Failed to scrape data: {str(e)}'}), 500
 
 
