@@ -6,7 +6,7 @@ async function fetchProductData() {
     }
 
     try {
-        const response = await fetch('https://price-advice.onrender.com/scrape', { // ใช้เส้นทาง relative เพื่อให้ทำงานทั้งใน dev และ production
+        const response = await fetch('/scrape', { // ใช้เส้นทาง relative
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ productId })
@@ -22,6 +22,7 @@ async function fetchProductData() {
         alert('Failed to fetch product data. Please try again later.');
     }
 }
+
 
 function displayProductData(data) {
     document.querySelector('.container').style.display = 'block';
